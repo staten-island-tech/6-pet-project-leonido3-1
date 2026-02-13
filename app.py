@@ -227,7 +227,7 @@ class player:
                     pet.yummy(15, 10, 5, 5, 0.25)
     def storefunc(user):
         global items_brought, stuyboost
-        gostore = input(f"Do you want to buy something? Balance: ${person.money} (y/n) ")
+        gostore = input(f"Do you want to buy something? Balance: ${user.money} (y/n) ")
         academic_items = [
                 {"name": "high school textbooks", 
                 "price": 50, 
@@ -260,23 +260,24 @@ class player:
                         print(f"{i+1}) You can buy {academic_items[i]["name"]} for {academic_items[i]["price"]}.")
                         print(f"It will boost studying by {academic_items[i]["boost"]}, and requires {academic_items[i]["req"]} intellect.")
                     itemselect = int(input("What would you like to buy? (1/2/3/4) "))
-                    if academic_items[itemselect]["price"] <= user.money and pet.smart > academic_items[i]["req"] and academic_items[i]["name"] not in items_brought:
-                        user.money -= academic_items[i]["price"]
-                        stuyboost += academic_items[i]["boost"]
-                        items_brought.append(academic_items[i]["name"])
+                    item = academic_items[itemselect-1]
+                    if item["price"] <= user.money and pet.smart >= item["req"] and item["name"] not in items_brought:
+                        user.money -= item["price"]
+                        stuyboost += academic_items[itemselect-1]["boost"]
+                        items_brought.append(academic_items[itemselect-1]["name"])
                         shopping = False
-                        print(f"You brought the {academic_items[i]["name"]}. Your balance is now {user.money}.")
-                    elif academic_items[i]["name"] in items_brought:
+                        print(f"You brought the {item["name"]}. Your balance is now {user.money}.")
+                    elif item["name"] in items_brought:
                         print("You already have that boost? ")
                         stop = input("Keep shopping? (y/n) ")
                         if stop == "n":
                             shopping = False
-                    elif academic_items[itemselect]["price"] > user.money:
+                    elif item["price"] > user.money:
                         print("You're too broke to buy that. ")
                         stop = input("Keep shopping? (y/n) ")
                         if stop == "n":
                             shopping = False
-                    elif pet.smart > academic_items[i]["req"]:
+                    elif pet.smart < academic_items[itemselect-1]["req"]:
                         print(f"{pet.name} is not smart enough to buy that! ")
                         stop = input("Keep shopping? (y/n) ")
                         if stop == "n":
@@ -298,7 +299,7 @@ def petactions():
         pet.ignore(10, 5)
 allowwork = True
 pet = cat(pname, 100, 30, 0, 30, 7.5)
-person = player(uname, 10, stuff)
+person = player(uname, 10000, stuff)
 def workfunc():
     global daysmissed, allowwork
     workaction = input(f"Do you want to go to work or interact more with {pet.name}? (work/interact) ")
