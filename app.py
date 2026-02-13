@@ -36,7 +36,7 @@ class cat:
         self.stamina = stamina
         self.fat = fat
     def study(self, happy, stamina):
-        gain = (basesmart + self.smart*0.15) * stuyboost * (0.6 + self.happy/300 + self.stamina/300)
+        gain = round(basesmart + self.smart*0.15) * stuyboost * (0.6 + self.happy/300 + self.stamina/300)
         self.smart += gain
         self.happy -= happy
         self.stamina -= stamina
@@ -162,31 +162,31 @@ class player:
         user.inv = inv
     def daytrade(user, money):
         global basesmart
-        if pet.smart >= 500:
-            user.money = money + 0.15*money*pet.smart
+        if pet.smart >= 450:
+            user.money = money + 0.2*money*pet.smart
             basesmart += 12
             pet.stamina -= 20
             print(f"Your cat uses its psychic powers to look into the future and tells you what stocks you should buy. "+
                   f"He got super tired from that, but gained great knowledge in the proccess! You now have ${user.money}. "+
                   f"{pet.name}'s stamina is now {pet.stamina}. ")
-        elif pet.smart >= 400:
-            user.money = money + 0.12*money*pet.smart
+        elif pet.smart >= 350:
+            user.money = money + 0.15*money*pet.smart
             basesmart += 7
             pet.stamina -= 15
             print(f"Your cat bribes politicians to tell you the best insider information. You now have ${user.money}. "+
                   "This drained his stamina by a lot but made him smarter. "+
                   f"{pet.name}'s stamina is now {pet.stamina}."
                   )
-        elif pet.smart >= 250:
-            user.money = money + 0.10*money*pet.smart
+        elif pet.smart >= 100:
+            user.money = money + 0.08*money*pet.smart
             basesmart += 3
             pet.stamina -= 10
             print(f"Your cat codes an algorithm to determine what you should buy. "+
                   f"You now have ${user.money}. He got very tired, but he's also a little smarter! "+
                   f"{pet.name}'s stamina is now {pet.stamina}. "
                   )
-        elif pet.smart >= 100:
-            user.money = money + 0.08*money*pet.smart
+        elif pet.smart >= 25:
+            user.money = money + 0.07*money*pet.smart
             basesmart += 3
             pet.stamina -= 5
             print(f"Your cat is smart enough to look up a day trading guide on the internet and tell you what stocks you should buy. " +
@@ -266,7 +266,7 @@ class player:
                         stuyboost += academic_items[itemselect-1]["boost"]
                         items_brought.append(academic_items[itemselect-1]["name"])
                         shopping = False
-                        print(f"You brought the {item["name"]}. Your balance is now {user.money}.")
+                        print(f"You brought the {item["name"]}. Your balance is now ${user.money}. {pet.name}'s studying boost is now {stuyboost}!")
                     elif item["name"] in items_brought:
                         print("You already have that boost? ")
                         stop = input("Keep shopping? (y/n) ")
@@ -290,16 +290,16 @@ class player:
 def petactions():
     action = input(f"What would you like to do with {pet.name}? (feed/play/study/ignore) ")
     if action == "feed":
-        pet.yummy(15, 10, 5, 5, 0.25)
+        pet.yummy(10, 15, 5, 5, 0.25)
     elif action == "play":
-        pet.play(10, 15, 0.25)
+        pet.play(20, 10, 0.5)
     elif action == "study":
-        pet.study(20, basesmart)
+        pet.study(15, basesmart)
     elif action == "ignore":
-        pet.ignore(10, 5)
+        pet.ignore(30, 10)
 allowwork = True
 pet = cat(pname, 100, 30, 0, 30, 7.5)
-person = player(uname, 10000, stuff)
+person = player(uname, 30, stuff)
 def workfunc():
     global daysmissed, allowwork
     workaction = input(f"Do you want to go to work or interact more with {pet.name}? (work/interact) ")
@@ -310,7 +310,7 @@ def workfunc():
             if worktype == "2":
                 if allowwork:
                     person.minimumwage(person.money)
-                    pet.happy -= 20
+                    pet.happy -= 10
                     print(f"You ignored {pet.name} for your entire shift! YOU MONSTER!! Happieness decreased to {pet.happy}! "
                         f"(hint hint: maybe try increasing {pet.name}'s intelligence to earn more money with his help)")
                 else: 
