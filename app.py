@@ -163,14 +163,14 @@ class player:
     def daytrade(user, money):
         global basesmart
         if pet.smart >= 450:
-            user.money = money + 0.2*money*pet.smart
+            user.money = money + 0.1*money*pet.smart
             basesmart += 12
             pet.stamina -= 20
             print(f"Your cat uses its psychic powers to look into the future and tells you what stocks you should buy. "+
                   f"He got super tired from that, but gained great knowledge in the proccess! You now have ${user.money}. "+
                   f"{pet.name}'s stamina is now {pet.stamina}. ")
         elif pet.smart >= 350:
-            user.money = money + 0.15*money*pet.smart
+            user.money = money + 0.08*money*pet.smart
             basesmart += 7
             pet.stamina -= 15
             print(f"Your cat bribes politicians to tell you the best insider information. You now have ${user.money}. "+
@@ -178,7 +178,7 @@ class player:
                   f"{pet.name}'s stamina is now {pet.stamina}."
                   )
         elif pet.smart >= 100:
-            user.money = money + 0.08*money*pet.smart
+            user.money = money + 0.05*money*pet.smart
             basesmart += 3
             pet.stamina -= 10
             print(f"Your cat codes an algorithm to determine what you should buy. "+
@@ -186,7 +186,7 @@ class player:
                   f"{pet.name}'s stamina is now {pet.stamina}. "
                   )
         elif pet.smart >= 25:
-            user.money = money + 0.07*money*pet.smart
+            user.money = money + 0.03*money*pet.smart
             basesmart += 3
             pet.stamina -= 5
             print(f"Your cat is smart enough to look up a day trading guide on the internet and tell you what stocks you should buy. " +
