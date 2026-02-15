@@ -162,31 +162,31 @@ class player:
         user.inv = inv
     def daytrade(user, money):
         global basesmart
-        if pet.smart >= 500:
-            user.money = money + 0.15*money*pet.smart
+        if pet.smart >= 450:
+            user.money = money + 0.08*money*pet.smart
             basesmart += 12
             pet.stamina -= 20
             print(f"Your cat uses its psychic powers to look into the future and tells you what stocks you should buy. "+
                   f"He got super tired from that, but gained great knowledge in the proccess! You now have ${user.money}. "+
                   f"{pet.name}'s stamina is now {pet.stamina}. ")
-        elif pet.smart >= 400:
-            user.money = money + 0.12*money*pet.smart
+        elif pet.smart >= 350:
+            user.money = money + 0.05*money*pet.smart
             basesmart += 7
             pet.stamina -= 15
             print(f"Your cat bribes politicians to tell you the best insider information. You now have ${user.money}. "+
                   "This drained his stamina by a lot but made him smarter. "+
                   f"{pet.name}'s stamina is now {pet.stamina}."
                   )
-        elif pet.smart >= 250:
-            user.money = money + 0.10*money*pet.smart
+        elif pet.smart >= 100:
+            user.money = money + 0.03*money*pet.smart
             basesmart += 3
             pet.stamina -= 10
             print(f"Your cat codes an algorithm to determine what you should buy. "+
                   f"You now have ${user.money}. He got very tired, but he's also a little smarter! "+
                   f"{pet.name}'s stamina is now {pet.stamina}. "
                   )
-        elif pet.smart >= 100:
-            user.money = money + 0.08*money*pet.smart
+        elif pet.smart >= 25:
+            user.money = money + 0.01*money*pet.smart
             basesmart += 3
             pet.stamina -= 5
             print(f"Your cat is smart enough to look up a day trading guide on the internet and tell you what stocks you should buy. " +
@@ -242,12 +242,12 @@ class player:
                 {"name": "PhD dissertation", 
                 "price": 1000, 
                 "boost": 1.5, 
-                "req": 100
+                "req": 150
                 },
                 {"name": "ancient tome of knowledge", 
-                "price": 3000, 
+                "price": 30000, 
                 "boost": 2.5, 
-                "req": 300
+                "req": 350
                 },
         ]
         if gostore == "y":
@@ -290,16 +290,16 @@ class player:
 def petactions():
     action = input(f"What would you like to do with {pet.name}? (feed/play/study/ignore) ")
     if action == "feed":
-        pet.yummy(15, 10, 5, 5, 0.25)
+        pet.yummy(5, 15, 5, 10, 0.25)
     elif action == "play":
-        pet.play(10, 15, 0.25)
+        pet.play(20, 15, 0.25)
     elif action == "study":
-        pet.study(20, basesmart)
+        pet.study(10, basesmart)
     elif action == "ignore":
-        pet.ignore(10, 5)
+        pet.ignore(40, 10)
 allowwork = True
 pet = cat(pname, 100, 30, 0, 30, 7.5)
-person = player(uname, 10000, stuff)
+person = player(uname, 30, stuff)
 def workfunc():
     global daysmissed, allowwork
     workaction = input(f"Do you want to go to work or interact more with {pet.name}? (work/interact) ")
