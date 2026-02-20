@@ -292,7 +292,7 @@ def petactions():
     if action == "feed":
         pet.yummy(5, 15, 5, 10, 0.25)
     elif action == "play":
-        pet.play(20, 15, 0.25)
+        pet.play(20, 15, 0.5)
     elif action == "study":
         pet.study(10, basesmart)
     elif action == "ignore":
