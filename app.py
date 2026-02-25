@@ -152,9 +152,9 @@ class cat:
                 elif keepinter == "n":
                     workfunc()
     def ignore(self, happy, stamina):
-        print(f"You ignore {self.name}, causing his stamina to go down to {self.stamina}, and his happieness to go down to {self.happy}!")
         self.happy -= happy
         self.stamina -= stamina
+        print(f"You ignore {self.name}, causing his stamina to go down to {self.stamina}, and his happieness to go down to {self.happy}!")
 class player:
     def __init__(user, uname, money, inv):
         user.uname = uname
